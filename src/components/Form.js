@@ -8,16 +8,28 @@ class Form extends Component {
                 firstname : "",
                 middlename : "",
                 lastname : ""
+            },
+
+            pDetails : {
+                imageSrc : "",
+                description : "",
+                profession : "" 
             }
         }
 
-        this.handleFormSubmit = this.handleFormSubmit.bind(this)
         this.handleName = this.handleName.bind(this)
+        this.handlePDetails = this.handlePDetails.bind(this)
     }
 
     handleName(nameInput){
         this.setState({
             name : nameInput
+        })
+    }
+
+    handlePDetails(PDetails){
+        this.setState({
+            pDetails : PDetails
         })
     }
     
@@ -27,12 +39,12 @@ class Form extends Component {
 
     render() {
         return (
-            <form>
-               <Details handleName = {this.handleName}/>
-               <button onClick={(e)=>{
+            <form onSubmit={(e)=>{
                 e.preventDefault()
-                this.handleFormSubmit()
-               }}>Submit</button>
+                this.handleFormSubmit()}}>
+               <Details handleName = {this.handleName}
+                        handlePDetails = {this.handlePDetails}/>
+               <button >Submit</button>
             </form>
         );
     }

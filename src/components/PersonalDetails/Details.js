@@ -9,7 +9,7 @@ class Details extends Component {
         return (
             <React.Fragment>
                 <Name handleName = {this.props.handleName}/>
-                <PDetails/>
+                <PDetails handlePDetails = {this.props.handlePDetails}/>
                 <Contacts/>
                 <Handles/>
             </React.Fragment>

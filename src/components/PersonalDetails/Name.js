@@ -18,7 +18,7 @@ class Name extends Component {
         )
     }
 
-    middleNameRender = async (e)=>{
+    middleNameRender =(e)=>{
         this.setState({
             middlename : e.target.value 
         },
