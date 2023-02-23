@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import Details from './PersonalDetails/Details';
 class Form extends Component {
     render() {
         return (
             <form>
-                <input/>
-                <button>Submit</button>
+               <Details />
+               <button>Submit</button>
             </form>
         );
     }

@@ -10,7 +10,9 @@ class InitialDesign extends Component {
                     <h1>{this.props.title}</h1>
                 </header>
                 <main>
-                    <Form />
+                    <div id='container'>
+                        <Form />
+                    </div>
                 </main>
                 <footer>
                     <span>Created By: rohan-1-3</span>

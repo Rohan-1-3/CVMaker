@@ -4,8 +4,21 @@
 }
 
 header{
-    background-color: aqua;
+    background-image: linear-gradient(to right, black, grey, rgba(0, 0, 0, 0.473), black);
     text-align: center;
+    font-size: 2.5vw;
+}
+
+main{
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.717), red, pink, rgba(0, 0, 0, 0.726));
+}
+
+#container{
+    margin: 10vw;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: grey;
+    border-radius: 10px;
 }
 
 .App{
@@ -28,6 +41,7 @@ footer a{
 
 footer span{
     font-size: 2vw;
+    margin-right: 10px;
 }
 
 footer img{
