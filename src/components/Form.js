@@ -22,13 +22,15 @@ class Form extends Component {
                 address: ""
             },
 
-            interest : []
+            interest : [],
+            handles : []
         }
 
         this.handleName = this.handleName.bind(this)
         this.handlePDetails = this.handlePDetails.bind(this)
         this.handleContacts = this.handleContacts.bind(this)
         this.handleInterests = this.handleInterests.bind(this)
+        this.handleHandles = this.handleHandles.bind(this)
     }
 
     handleName(nameInput){
@@ -54,6 +56,12 @@ class Form extends Component {
             interest : interests
         })
     }
+
+    handleHandles(handle){
+        this.setState({
+            handles : handle
+        })
+    }
     
     handleFormSubmit(){
         console.log(this.state)
@@ -67,7 +75,8 @@ class Form extends Component {
                <Details handleName = {this.handleName}
                         handlePDetails = {this.handlePDetails}
                         handleContacts = {this.handleContacts}
-                        handleInterests = {this.handleInterests}/>
+                        handleInterests = {this.handleInterests}
+                        handleHandles = {this.handleHandles}/>
                <button >Submit</button>
             </form>
         );
