@@ -14,11 +14,18 @@ class Form extends Component {
                 imageSrc : "",
                 description : "",
                 profession : "" 
+            },
+
+            contacts : {
+                number : "",
+                email : "",
+                address: ""
             }
         }
 
         this.handleName = this.handleName.bind(this)
         this.handlePDetails = this.handlePDetails.bind(this)
+        this.handleContacts = this.handleContacts.bind(this)
     }
 
     handleName(nameInput){
@@ -32,6 +39,12 @@ class Form extends Component {
             pDetails : PDetails
         })
     }
+
+    handleContacts(contact){
+        this.setState({
+            contacts : contact
+        })
+    }
     
     handleFormSubmit(){
         console.log(this.state)
@@ -43,7 +56,8 @@ class Form extends Component {
                 e.preventDefault()
                 this.handleFormSubmit()}}>
                <Details handleName = {this.handleName}
-                        handlePDetails = {this.handlePDetails}/>
+                        handlePDetails = {this.handlePDetails}
+                        handleContacts = {this.handleContacts}/>
                <button >Submit</button>
             </form>
         );

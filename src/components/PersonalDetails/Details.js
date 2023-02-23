@@ -10,7 +10,7 @@ class Details extends Component {
             <React.Fragment>
                 <Name handleName = {this.props.handleName}/>
                 <PDetails handlePDetails = {this.props.handlePDetails}/>
-                <Contacts/>
+                <Contacts handleContacts = {this.props.handleContacts}/>
                 <Handles/>
             </React.Fragment>
         );
