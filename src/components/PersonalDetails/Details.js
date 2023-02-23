@@ -8,7 +8,7 @@ class Details extends Component {
     render() {
         return (
             <React.Fragment>
-                <Name/>
+                <Name handleName = {this.props.handleName}/>
                 <PDetails/>
                 <Contacts/>
                 <Handles/>
