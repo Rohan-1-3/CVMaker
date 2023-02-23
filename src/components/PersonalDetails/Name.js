@@ -10,11 +10,12 @@ class Name extends Component {
         }
     }
 
+    // methods for updating inputs 
     firstNameRender = (e)=>{
         this.setState({
             firstname : e.target.value 
         },
-        this.componentDidMount
+        this.componentDidMount// gets called only after the Name.js state is updated
         )
     }
 
@@ -35,7 +36,7 @@ class Name extends Component {
         )
     }
 
-    componentDidMount(){
+    componentDidMount(){// updates the parent state
         this.props.handleName(this.state)
     }
 

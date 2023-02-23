@@ -4,12 +4,12 @@ class Handles extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            inserting : false,
-            selected: false,
-            socialName: "",
-            inputValue : "",
+            inserting : false,// changes button to select when true
+            selected: false,// changes select to form when true
+            socialName: "",// name of selected media
+            inputValue : "",// input of handle name
 
-            initialSocials : [{
+            initialSocials : [{// helps to edit and for image
                 handle : "Github",
                 imgSrc : "",
                 name : ""
@@ -23,32 +23,37 @@ class Handles extends Component {
                 name : ""
             }],
 
-            socials : []
+            socials : []// inserting the handles which are valid
         }
     }
 
     addSocialButton=()=>{
         this.setState({
-            inserting : true
+            inserting : true// button to select
         })
     }
 
     optionSelection = (e)=>{
         this.setState({
-            selected : true,
+            selected : true,// select to input
             socialName : e.target.value
         })
     }
     
     handleInput=(e)=>{
-        this.setState({
+        this.setState({// update input display
             inputValue : e.target.value
         })
     }
 
     addingSocial = ()=>{
-        this.state.initialSocials.map(x => (x.handle === this.state.socialName) ? x.name = this.state.inputValue : 0)
-        this.state.initialSocials.map(x => (x.name !== "" && !this.state.socials.includes(x)) ? this.state.socials.push(x) : 0)
+        // direct changing name of respective handle
+        this.state.initialSocials.map(x => (x.handle === this.state.socialName) 
+        ? x.name = this.state.inputValue : 0)
+        // direct pushing valid handles 
+        this.state.initialSocials.map(x => (x.name !== "" 
+        && !this.state.socials.includes(x)) ? this.state.socials.push(x) : 0)
+        // resetting and re-rendering
         this.setState({
             inserting : false,
             selected: false,
@@ -60,7 +65,7 @@ class Handles extends Component {
     }
 
     deletingSocial=(handle)=>{
-        this.setState({
+        this.setState({// filtering in all the handles except the deleted one
             socials : this.state.socials.filter(x => x.handle !== handle)
         },
         this.componentDidMount
@@ -81,44 +86,41 @@ class Handles extends Component {
                 </select>
             )
         const handles = this.state.socials.map(x => {
-            return (
+            return (// displaying all the handles added
                 <div key={x.handle}>
-                <img src={x.imgSrc} alt={x.handle}/>
-                {x.name}
-                <button onClick={()=>this.deletingSocial(x.handle)}>Delete</button>
+                    <img src={x.imgSrc} alt={x.handle}/>
+                    {x.name}
+                    <button onClick={()=>this.deletingSocial(x.handle)}>Delete</button>
                 </div>
             )
         })
         if(this.state.inserting){
             if(this.state.selected){
-                return (
+                return (// form for handle and display all handles
                     <div>
                         <label>{this.state.socialName}:</label>
                         <input value={this.state.inputValue} onChange={this.handleInput}/>
                         <button onClick={this.addingSocial}>Submit</button>
-
-                            {handles}
+                        {handles}
                     </div>
                 )
             }
             else{
-                return(
+                return(// options of hanldes and display handles
                     <div>
                         {options}
-
-                            {handles}
- 
+                        {handles}
                     </div>
                     
                 )
             }
         }
-        return (
+        return (// Button to add and edit and the handles display
             <div>
-            <button onClick={this.addSocialButton}>Add/Edit Social</button>
-            <ol>
-            {handles}
-            </ol>
+                <button onClick={this.addSocialButton}>Add/Edit Social</button>
+                <ol>
+                    {handles}
+                </ol>
             </div>
         );
     }

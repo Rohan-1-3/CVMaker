@@ -25,7 +25,7 @@ class Form extends Component {
             interest : [],
             handles : []
         }
-
+        // binding the methods for children to use
         this.handleName = this.handleName.bind(this)
         this.handlePDetails = this.handlePDetails.bind(this)
         this.handleContacts = this.handleContacts.bind(this)
@@ -34,36 +34,36 @@ class Form extends Component {
     }
 
     handleName(nameInput){
-        this.setState({
+        this.setState({// sets new/updated Name
             name : nameInput
         })
     }
 
     handlePDetails(PDetails){
-        this.setState({
+        this.setState({// sets new/updated Personal Details
             pDetails : PDetails
         })
     }
 
     handleContacts(contact){
-        this.setState({
+        this.setState({// sets new/updated Contacts
             contacts : contact
         })
     }
 
     handleInterests(interests){
-        this.setState({
+        this.setState({// sets new/updated interests
             interest : interests
         })
     }
 
     handleHandles(handle){
-        this.setState({
+        this.setState({// sets new/updated socia;s
             handles : handle
         })
     }
     
-    handleFormSubmit(){
+    handleFormSubmit(){// checking data transfer
         console.log(this.state)
     }
 

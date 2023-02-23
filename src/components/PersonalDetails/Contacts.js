@@ -9,7 +9,7 @@ class Contacts extends Component {
             address: ""
         }
     }
-
+// methods for updating inputs
     handleNumber = e =>{
         this.setState({
             number : e.target.value
@@ -31,7 +31,7 @@ class Contacts extends Component {
         this.componentDidMount)
     }
 
-    componentDidMount(){
+    componentDidMount(){// sending updated data to main state
         this.props.handleContacts(this.state)
     }
 

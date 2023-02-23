@@ -5,13 +5,13 @@ class Interest extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            interests : {
+            interests : {// new interest object
                 key: uniqid(),
                 isSubmit : true,
                 text : ""
             },
-            interestsArray : [],
-            addInterests : false,
+            interestsArray : [],// stores all the input interests
+            addInterests : false,// helps to change button to form to add interests
             editInput : "",
 
         }
@@ -24,47 +24,48 @@ class Interest extends Component {
     }
 
     deletingInterests = (id)=>{
-        this.setState({
+        this.setState({// filtering in all the interests except the deleted one
             interestsArray : this.state.interestsArray.filter(x => x.key !== id)
         },
         this.componentDidMount
         )
     }
 
-    editButton = (id, text)=>{
+    editButton = (id, text)=>{// updates the button to form
         this.state.interestsArray.map(interest => (interest.key === id) ? interest.isSubmit = false : 0)
         this.setState({
             editInput : text,
             interestsArray : this.state.interestsArray
         })
-        console.log(this.state)
+
     }
 
-    editInput = (e)=>{
+    editInput = (e)=>{// inputting the value
         this.setState({
             editInput : e.target.value 
         })
     }
 
     editingInterests = (interest)=>{
+        // direct setting changes the value but doesn't re-render the html...
         this.state.interestsArray.map(x => {
-            if(x.key === interest.key){
+            if(x.key === interest.key){// checks each interest then changes one accr to thier key
                 x.text = this.state.editInput
-                x.isSubmit = true
+                x.isSubmit = true// changes form back to button
             }
-            return 0
+            return 0;
         })
-
-        this.setState({
+        // ... so using setState to re-render
+        this.setState({ // ressting the form
             editInput : "",
             interestsArray : this.state.interestsArray
         },
         this.componentDidMount
         )
-        console.log(this.state)
+
     }
 
-    handleInterestInput = (e)=>{
+    handleInterestInput = (e)=>{// updating the input value
         this.setState({
             interests : {
                 key: this.state.interests.key,
@@ -74,9 +75,11 @@ class Interest extends Component {
         })
     }
 
-    interestFormHandle = (e)=>{
+    interestFormHandle = (e)=>{// inserts new interest to arr 
         e.preventDefault()
+        // only changes no re-render..
         this.state.interestsArray.push(this.state.interests)
+        // ..re-renders and resets
         this.setState({
             addInterests : false,
             interests : {
@@ -97,7 +100,7 @@ class Interest extends Component {
     render() {
         const interests = this.state.interestsArray;
         const renderInterests = interests.map(interest => {
-            if(interest.isSubmit){
+            if(interest.isSubmit){// display interest only if all are not in edit mode
             return (
                 <div key={interest.key}>
                     <li>{interest.text}</li>
@@ -105,7 +108,7 @@ class Interest extends Component {
                     <button onClick={()=>this.editButton(interest.key, interest.text)}>Edit</button>
                 </div>
             )}
-            else{
+            else{// edit mode turns into form
                 return (
                     <div key={interest.key}>
                         <li></li>
@@ -115,7 +118,7 @@ class Interest extends Component {
                 )
             }
         })
-        if(this.state.addInterests){
+        if(this.state.addInterests){// adding mode
             return(
                 <React.Fragment>
                 <div>
@@ -128,7 +131,7 @@ class Interest extends Component {
             </React.Fragment>
             )
         }
-        else{
+        else{// not in adding mode so has a add button
             return (
                 <React.Fragment>
                     <div className='interest'>

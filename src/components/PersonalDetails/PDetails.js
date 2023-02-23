@@ -10,9 +10,10 @@ class PDetails extends Component {
         }
     }
     
+    // methods for updating inputs
     handleImage = (e)=>{
         this.setState({
-            imageSrc : URL.createObjectURL(e.target.files[0])
+            imageSrc : URL.createObjectURL(e.target.files[0])// creating a local url of image added by user
         },
         this.componentDidMount
         )
@@ -34,7 +35,7 @@ class PDetails extends Component {
         )
     }
 
-    componentDidMount(){
+    componentDidMount(){// sending updated data to main state
         this.props.handlePDetails(this.state)
     }
 
@@ -42,7 +43,7 @@ class PDetails extends Component {
         return (
             <div className='details'>
                 <label htmlFor='display-picture'>Display Picture</label>
-                <input type="file" accept="image/png, image/jpeg" onInput={this.handleImage}/>
+                <input type="file" accept="image/png, image/jpeg" onChange={this.handleImage}/>
 
                 <label htmlFor='profile'>Personal Profile</label>
                 <textarea value={this.state.description} onChange={this.handleDescription}/>
