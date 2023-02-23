@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Name from './Name';
 import PDetails from './PDetails';
 import Contacts from './Contacts';
+import Interest from "./Interest";
 import Handles from './Handles';
 
 class Details extends Component {
@@ -12,6 +13,7 @@ class Details extends Component {
                 <PDetails handlePDetails = {this.props.handlePDetails}/>
                 <Contacts handleContacts = {this.props.handleContacts}/>
                 <Handles/>
+                <Interest/>
             </React.Fragment>
         );
     }

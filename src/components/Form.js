@@ -20,6 +20,10 @@ class Form extends Component {
                 number : "",
                 email : "",
                 address: ""
+            },
+
+            interest : {
+                
             }
         }
 
