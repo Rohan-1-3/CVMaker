@@ -11,7 +11,8 @@ class Interest extends Component {
                 text : ""
             },
             interestsArray : [],
-            addInterests : false
+            addInterests : false,
+            editInput : "",
 
         }
     }
@@ -20,6 +21,47 @@ class Interest extends Component {
         this.setState({
             addInterests : true
         })
+    }
+
+    deletingInterests = (id)=>{
+        this.setState({
+            interestsArray : this.state.interestsArray.filter(x => x.key !== id)
+        },
+        this.componentDidMount
+        )
+    }
+
+    editButton = (id, text)=>{
+        this.state.interestsArray.map(interest => (interest.key === id) ? interest.isSubmit = false : 0)
+        this.setState({
+            editInput : text,
+            interestsArray : this.state.interestsArray
+        })
+        console.log(this.state)
+    }
+
+    editInput = (e)=>{
+        this.setState({
+            editInput : e.target.value 
+        })
+    }
+
+    editingInterests = (interest)=>{
+        this.state.interestsArray.map(x => {
+            if(x.key === interest.key){
+                x.text = this.state.editInput
+                x.isSubmit = true
+            }
+            return 0
+        })
+
+        this.setState({
+            editInput : "",
+            interestsArray : this.state.interestsArray
+        },
+        this.componentDidMount
+        )
+        console.log(this.state)
     }
 
     handleInterestInput = (e)=>{
@@ -42,21 +84,36 @@ class Interest extends Component {
                 isSubmit : true,
                 text : ""
             }
-        })
+        },
+        this.componentDidMount
+        )
         
-        console.log(this.state)
+    }
+
+    componentDidMount(){
+        this.props.handleInterests(this.state.interestsArray)
     }
 
     render() {
         const interests = this.state.interestsArray;
         const renderInterests = interests.map(interest => {
+            if(interest.isSubmit){
             return (
                 <div key={interest.key}>
                     <li>{interest.text}</li>
-                    <button>Delete</button>
-                    <button>Edit</button>
+                    <button onClick={()=>this.deletingInterests(interest.key)}>Delete</button>
+                    <button onClick={()=>this.editButton(interest.key, interest.text)}>Edit</button>
                 </div>
-            )
+            )}
+            else{
+                return (
+                    <div key={interest.key}>
+                        <li></li>
+                        <input value={this.state.editInput} onChange={this.editInput}/>
+                        <button onClick={()=>this.editingInterests(interest)}>Edit</button>
+                    </div>
+                )
+            }
         })
         if(this.state.addInterests){
             return(
