@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Education from './Education';
 import Details from './PersonalDetails/Details';
 class Form extends Component {
     constructor(props) {
@@ -23,7 +24,8 @@ class Form extends Component {
             },
 
             interest : [],
-            handles : []
+            handles : [],
+            educationsArr : []
         }
         // binding the methods for children to use
         this.handleName = this.handleName.bind(this)
@@ -31,6 +33,7 @@ class Form extends Component {
         this.handleContacts = this.handleContacts.bind(this)
         this.handleInterests = this.handleInterests.bind(this)
         this.handleHandles = this.handleHandles.bind(this)
+        this.handleEducation = this.handleEducation.bind(this)
     }
 
     handleName(nameInput){
@@ -62,6 +65,12 @@ class Form extends Component {
             handles : handle
         })
     }
+
+    handleEducation(education){
+        this.setState({
+            educationsArr : education
+        })
+    }
     
     handleFormSubmit(){// checking data transfer
         console.log(this.state)
@@ -77,6 +86,7 @@ class Form extends Component {
                         handleContacts = {this.handleContacts}
                         handleInterests = {this.handleInterests}
                         handleHandles = {this.handleHandles}/>
+                <Education handleEducation = {this.handleEducation}/>
                <button >Submit</button>
             </form>
         );
