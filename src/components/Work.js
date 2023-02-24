@@ -6,7 +6,7 @@ class Work extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            addingMode : false,
+            addingMode : false,// button to form when true
             form : {
                 id: uniqid(),
                 name : "",
@@ -14,7 +14,7 @@ class Work extends Component {
                 joined: `${new Date().getFullYear()}`,// current year
                 left: "",
             },
-            workArr : []
+            workArr : []// stores all the work experience
         }
     }
 
@@ -23,7 +23,7 @@ class Work extends Component {
             addingMode : true
         })
     }
-
+    // methods for updating state and display..
     formNameUpdate = (e)=>{
         this.setState({
             form : {
@@ -71,14 +71,11 @@ class Work extends Component {
             }
         })
     }
-
-    editHandle = ()=>{
-        console.log(this.state)
-    }
+    // ...ending of methods
 
     formSubmitHanlde = ()=>{
-        this.state.workArr.push(this.state.form);
-        this.setState({
+        this.state.workArr.push(this.state.form);// direct changing the array
+        this.setState({// resets the form
             addingMode : false,
             form : {
                 id: uniqid(),
@@ -88,15 +85,14 @@ class Work extends Component {
                 left: "",
             },
         },
-        this.editHandle,
-        this.componentDidMount)
+        this.componentDidMount)// sending data to main state
     }
 
     deleteWork = (id)=>{
-        this.setState({
+        this.setState({// filters in all except the one deleted
             workArr : this.state.workArr.filter(x => x.id !== id)
         },
-        this.componentDidMount)
+        this.componentDidMount)// send data to main state
     }
 
     componentDidMount(){
@@ -104,26 +100,23 @@ class Work extends Component {
     }
     
     render() {
-        const workDisplay = this.state.workArr.map(x=>{
+        const workDisplay = this.state.workArr.map(x=>{// has display for all the experience 
             return(
                 <div className='work-list'>
-                <img src='https://cdn-icons-png.flaticon.com/512/32/32213.png' alt='arrow'/>
-                <label>{x.name}</label>
-                <br/>
-                {x.post}, {x.joined} - {x.left}
-                <img src='https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/cross-icon.png'
-                    alt='cross' onClick={()=>this.deleteWork(x.id)}/>
-                <img  onClick={()=>this.editButton()}
-                    src='https://cdn-icons-png.flaticon.com/512/1827/1827951.png' 
-                    alt='cross'/>
+                    <img src='https://cdn-icons-png.flaticon.com/512/32/32213.png' alt='arrow'/>
+                    <label>{x.name}</label>
+                    <br/>
+                    {x.post}, {x.joined} - {x.left}
+                    <img src='https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/cross-icon.png'
+                        alt='cross' onClick={()=>this.deleteWork(x.id)}/>
                 </div>
             )
         })
 
         const form = this.state.form
-        if(!this.state.addingMode){
+        if(!this.state.addingMode){// adding button
             return (
-                <div>
+                <div className='work-experience'>
                     <label>Work Experience</label>
                     <button onClick={this.addingModeOn}>Add New Work Experience</button>
                     {workDisplay}
@@ -131,8 +124,8 @@ class Work extends Component {
             );
         }else{
             
-            return(
-                <div>
+            return(// form for work experience
+                <div className='work-form'>
                     <label>Work Experience</label>
                     <label htmlFor='company-name'>Company Name:</label>
                     <input value={form.name} onChange={this.formNameUpdate}/>
