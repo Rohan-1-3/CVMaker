@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
+import yearSelect from './Year';
 
 class Education extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            addingMode : false,
-            selected: false,
+            addingMode : false,// for button to level select
+            selected: false,// for select to form
             form : {
                 name : "",
                 level : "",
                 subject: "",
-                joined: "2023",
+                joined: `${new Date().getFullYear()}`,// current year
                 passed: "",
             },
-            educationArr : []
+            educationArr : []// all the levels education to be added in this array
         }
     }
     
     adddingModeOn = ()=>{
-        this.setState({
+        this.setState({// button pressed
             addingMode : true
         })
     }
 
+    // methods for updating the form details
     formNameUpdate=(e)=>{
         this.setState({
             form : {
@@ -83,14 +85,16 @@ class Education extends Component {
             selected : true
         })
     }
+    // form details handling ends here
 
+    // adding and editing the education details happen here
     editHandle= ()=>{
         this.state.educationArr.push(this.state.form)
-        this.setState({
+        this.setState({// resets form
             addingMode : false,
             selected: false,
             form : {
-                name : "",
+                name : `${new Date().getFullYear()}`,
                 level : "",
                 subject: "",
                 joined: "",
@@ -98,13 +102,13 @@ class Education extends Component {
                 editingMode : false,
             },
         },
-        this.componentDidMount
+        this.componentDidMount// sends data to main state
         )
         console.log(this.state)
     }
 
     formSubmitHanlde = ()=>{
-       this.setState({
+       this.setState({// for editing removes prev and lauches function for the edited one
         educationArr : this.state.educationArr.filter(x=>(x.level !== this.state.form.level))
        },
        this.editHandle
@@ -113,7 +117,7 @@ class Education extends Component {
     }
 
     deleteEducation = (level)=>{
-        this.setState({
+        this.setState({// filters in all except deleted one
             educationArr : this.state.educationArr.filter(x => (x.level !== level))
         },
         this.componentDidMount
@@ -125,13 +129,6 @@ class Education extends Component {
     }
 
     render() {
-        const yearArr = [];
-        const currentYear = new Date().getFullYear();
-        for (let i = 0; i < 100; i++) {
-            yearArr.push(currentYear - i)
-        }     
-        const yearSelect = yearArr.map(x =>(<option key={x} value={x}>{x}</option>))
-
         const schoolDisplay = this.state.educationArr.map(x=>{
             return(
                 <div className='education-list'>
@@ -169,7 +166,6 @@ class Education extends Component {
                         <label htmlFor='school-name'>Institute Name:</label>
                         <input value={form.name} onChange={this.formNameUpdate}/>
         
-
                         <label htmlFor='subject'>Subject/Course:</label>
                         <input value={form.subject} onChange={this.formSubjectUpdate}/>
         
