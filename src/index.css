@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    font-weight: bolder;
 }
 
 header{
@@ -14,14 +15,101 @@ main{
 }
 
 #container{
-    margin: 10vw;
+    margin: 20vw;
     margin-top: 20px;
     margin-bottom: 20px;
+    padding: 4rem;
     background-color: grey;
     border-radius: 10px;
 }
 
 .App{
+    display: flex;
+    flex-direction: column;
+}
+
+.my-form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.my-form > div{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+input, button, textarea, select{
+    height: 3em;
+    border-radius: 3em;
+    border-width: 0px;
+    padding-left: 2em;
+    font-size: 1em;
+}
+
+input:valid, textarea:valid{
+    background-color: rgba(13, 237, 13, 0.461);
+}
+
+input:focus:invalid, textarea:focus:invalid{
+    background-color: rgba(255, 0, 0, 0.511);
+}
+
+label{
+    color: white;
+    font-size: 1.3em;
+}
+
+textarea{
+    padding: 2em;
+    resize: none;
+}
+
+input:focus, textarea:focus{
+    outline: none;
+}
+
+input[type="file"]{
+    background-color: transparent;
+}
+
+button{
+    cursor: pointer;
+    background-color: rgba(0, 119, 255, 0.463);
+}
+
+.interest img{
+    height: 1em;
+    position: relative;
+    top: 0.3em;
+    margin-left: 0.5em;
+}
+
+.interest-list {
+    font-size: 1.5em;
+}
+
+.handles img{
+    position: relative;
+    top: 0.3em;
+    height: 1em;
+    margin-right: 0.5em;
+}
+
+.handle-display{
+    font-size: 2em;
+}
+
+.handle-display button{
+    position: relative;
+    right: 1.5em;
+    bottom: 2px;
+    font-size: 20px;
+    background-color: transparent;
+}
+
+.name{
     display: flex;
     flex-direction: column;
 }

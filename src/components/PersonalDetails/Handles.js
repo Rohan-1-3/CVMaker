@@ -11,15 +11,15 @@ class Handles extends Component {
 
             initialSocials : [{// helps to edit and for image
                 handle : "Github",
-                imgSrc : "",
+                imgSrc : "https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png",
                 name : ""
             }, {
                 handle : "Instagram",
-                imgSrc : "",
+                imgSrc : "https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-instagram-icon-png-image_6315974.png",
                 name : ""
             },{
                 handle : "Twitter",
-                imgSrc : "",
+                imgSrc : "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Twitter-logo.svg/2491px-Twitter-logo.svg.png",
                 name : ""
             }],
 
@@ -87,17 +87,20 @@ class Handles extends Component {
             )
         const handles = this.state.socials.map(x => {
             return (// displaying all the handles added
-                <div key={x.handle}>
+                <div key={x.handle} className='handle-display'>
                     <img src={x.imgSrc} alt={x.handle}/>
                     {x.name}
-                    <button onClick={()=>this.deletingSocial(x.handle)}>Delete</button>
+                    <button onClick={()=>this.deletingSocial(x.handle)}>
+                    <img src='https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/cross-icon.png' 
+                         alt='img'/>
+                    </button>
                 </div>
             )
         })
         if(this.state.inserting){
             if(this.state.selected){
                 return (// form for handle and display all handles
-                    <div>
+                    <div className='handles'>
                         <label>{this.state.socialName}:</label>
                         <input value={this.state.inputValue} onChange={this.handleInput}/>
                         <button onClick={this.addingSocial}>Submit</button>
@@ -107,7 +110,7 @@ class Handles extends Component {
             }
             else{
                 return(// options of hanldes and display handles
-                    <div>
+                    <div className='handles'>
                         {options}
                         {handles}
                     </div>
@@ -116,11 +119,9 @@ class Handles extends Component {
             }
         }
         return (// Button to add and edit and the handles display
-            <div>
-                <button onClick={this.addSocialButton}>Add/Edit Social</button>
-                <ol>
-                    {handles}
-                </ol>
+            <div className='handles'>
+                <button onClick={this.addSocialButton}>Add/Edit Social Handle</button>
+                {handles}
             </div>
         );
     }

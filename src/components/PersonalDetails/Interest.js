@@ -90,7 +90,6 @@ class Interest extends Component {
         },
         this.componentDidMount
         )
-        
     }
 
     componentDidMount(){
@@ -102,18 +101,24 @@ class Interest extends Component {
         const renderInterests = interests.map(interest => {
             if(interest.isSubmit){// display interest only if all are not in edit mode
             return (
-                <div key={interest.key}>
-                    <li>{interest.text}</li>
-                    <button onClick={()=>this.deletingInterests(interest.key)}>Delete</button>
-                    <button onClick={()=>this.editButton(interest.key, interest.text)}>Edit</button>
+                <div key={interest.key} className="interest-list">
+                <img src='https://cdn-icons-png.flaticon.com/512/32/32213.png' alt='arrow'/>
+                    {interest.text}
+                    <img  onClick={()=>this.deletingInterests(interest.key)} 
+                            src='https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/cross-icon.png' 
+                            alt='cross'/>
+                    <img  onClick={()=>this.editButton(interest.key, interest.text)}
+                            src='https://cdn-icons-png.flaticon.com/512/1827/1827951.png' 
+                            alt='cross'/>
                 </div>
             )}
             else{// edit mode turns into form
                 return (
                     <div key={interest.key}>
-                        <li></li>
                         <input value={this.state.editInput} onChange={this.editInput}/>
-                        <button onClick={()=>this.editingInterests(interest)}>Edit</button>
+                        <img  onClick={()=>this.editingInterests(interest)}
+                            src='https://cdn-icons-png.flaticon.com/512/1827/1827951.png' 
+                            alt='cross'/>
                     </div>
                 )
             }
@@ -121,13 +126,12 @@ class Interest extends Component {
         if(this.state.addInterests){// adding mode
             return(
                 <React.Fragment>
-                <div>
+                <div className='interest'>
                     <input value={this.state.interests.text} onChange={this.handleInterestInput}/>
-                    <button onClick={this.interestFormHandle}>Add</button>
-                </div>
-                <ol>
+                    <button onClick={this.interestFormHandle}>Add Interest</button>
                     {renderInterests}
-                </ol>
+                </div>
+                
             </React.Fragment>
             )
         }
@@ -135,11 +139,10 @@ class Interest extends Component {
             return (
                 <React.Fragment>
                     <div className='interest'>
-                        <button onClick={this.addingInterests}>Add</button>
-                    </div>
-                    <ol>
+                        <button onClick={this.addingInterests}>Add Interests</button>
                         {renderInterests}
-                    </ol>
+                    </div>
+                    
                 </React.Fragment>
             );
         }

@@ -39,13 +39,14 @@ class Contacts extends Component {
         return (
             <div className='contacts'>
                 <label htmlFor='phone'>Phone:</label>
-                <input value={this.state.number} onChange={this.handleNumber} type="number"/>
+                <input value={this.state.number} onChange={this.handleNumber}
+                pattern="[9][7-8][0-9]{8}" type="text" required/>
 
                 <label htmlFor='email'>E-mail:</label>
-                <input value={this.state.email} onChange={this.handleEmail} type="email"/>
+                <input value={this.state.email} onChange={this.handleEmail} type="email" required/>
 
                 <label htmlFor='address'>Address:</label>
-                <input value={this.state.address} onChange={this.handleAddress}/>
+                <input value={this.state.address} onChange={this.handleAddress}  title='Suggested Format=>Balaju-15' required/>
             </div>
         );
     }

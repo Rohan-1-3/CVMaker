@@ -43,13 +43,16 @@ class PDetails extends Component {
         return (
             <div className='details'>
                 <label htmlFor='display-picture'>Display Picture</label>
-                <input type="file" accept="image/png, image/jpeg" onChange={this.handleImage}/>
+                <input type="file" accept="image/png, image/jpeg" 
+                title='Choose Your Display Picture' onChange={this.handleImage} required/>
 
                 <label htmlFor='profile'>Personal Profile</label>
-                <textarea value={this.state.description} onChange={this.handleDescription}/>
+                <textarea value={this.state.description} onChange={this.handleDescription} 
+                minlength="50" maxlength="100" required/>
 
                 <label htmlFor='occupation'>Profession:</label>
-                <input value={this.state.profession} onChange={this.handleProfession} type="text"/>
+                <input value={this.state.profession} onChange={this.handleProfession} 
+                minlength="3" maxlength="15" type="text" required/>
             </div>
         );
     }

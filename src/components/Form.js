@@ -69,7 +69,7 @@ class Form extends Component {
 
     render() {
         return (
-            <form onSubmit={(e)=>{
+            <form className='my-form' onSubmit={(e)=>{
                 e.preventDefault()
                 this.handleFormSubmit()}}>
                <Details handleName = {this.handleName}
