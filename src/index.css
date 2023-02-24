@@ -90,7 +90,7 @@ button{
     font-size: 1.5em;
 }
 
-.handles img, .education-list img, .skills-list img{
+.handles img, .education-list img, .skills-list img, .work-list img{
     position: relative;
     top: 0.3em;
     height: 1em;

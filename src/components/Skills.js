@@ -58,6 +58,7 @@ class Skills extends Component {
         if(this.state.addingMode){
         return (
             <div>
+                <label>Skills</label>
                 <input value={this.state.inputDisplay} onChange={this.inputDisplay}/>
                 <button onClick={this.onSubmit}>Add Skill</button>
                 {skills}
@@ -66,6 +67,7 @@ class Skills extends Component {
     }else{
         return(
             <div>
+                <label>Skills</label>
                 <button onClick={this.addingModeOn}>Add Skills</button>
                 {skills}
             </div>

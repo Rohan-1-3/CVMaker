@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Education from './Education';
 import Details from './PersonalDetails/Details';
 import Skills from './Skills';
+import Work from './Work';
 class Form extends Component {
     constructor(props) {
         super(props);
@@ -27,7 +28,8 @@ class Form extends Component {
             interest : [],
             handles : [],
             educationsArr : [],
-            skills :[]
+            skills :[],
+            works : []
         }
         // binding the methods for children to use
         this.handleName = this.handleName.bind(this)
@@ -37,6 +39,7 @@ class Form extends Component {
         this.handleHandles = this.handleHandles.bind(this)
         this.handleEducation = this.handleEducation.bind(this)
         this.handleSkills = this.handleSkills.bind(this)
+        this.handleWork = this.handleWork.bind(this)
     }
 
     handleName(nameInput){
@@ -81,6 +84,12 @@ class Form extends Component {
         })
     }
     
+    handleWork(work){
+        this.setState({
+            works : work
+        })
+    }
+
     handleFormSubmit(){// checking data transfer
         console.log(this.state)
     }
@@ -97,6 +106,7 @@ class Form extends Component {
                         handleHandles = {this.handleHandles}/>
                 <Education handleEducation = {this.handleEducation}/>
                 <Skills handleSkills={this.handleSkills}/>
+                <Work handleWork={this.handleWork}/>
                <button >Submit</button>
             </form>
         );

@@ -125,8 +125,10 @@ class Interest extends Component {
         })
         if(this.state.addInterests){// adding mode
             return(
+                
                 <React.Fragment>
                 <div className='interest'>
+                <label>Interests</label>
                     <input value={this.state.interests.text} onChange={this.handleInterestInput}/>
                     <button onClick={this.interestFormHandle}>Add Interest</button>
                     {renderInterests}
@@ -139,6 +141,7 @@ class Interest extends Component {
             return (
                 <React.Fragment>
                     <div className='interest'>
+                    <label>Interests</label>
                         <button onClick={this.addingInterests}>Add Interests</button>
                         {renderInterests}
                     </div>

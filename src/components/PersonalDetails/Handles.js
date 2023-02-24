@@ -101,6 +101,7 @@ class Handles extends Component {
             if(this.state.selected){
                 return (// form for handle and display all handles
                     <div className='handles'>
+                    <label>Handles</label>
                         <label>{this.state.socialName}:</label>
                         <input value={this.state.inputValue} onChange={this.handleInput}/>
                         <button onClick={this.addingSocial}>Submit</button>
@@ -111,6 +112,7 @@ class Handles extends Component {
             else{
                 return(// options of hanldes and display handles
                     <div className='handles'>
+                    <label>Handles</label>
                         {options}
                         {handles}
                     </div>
@@ -120,6 +122,7 @@ class Handles extends Component {
         }
         return (// Button to add and edit and the handles display
             <div className='handles'>
+            <label>Handles</label>
                 <button onClick={this.addSocialButton}>Add/Edit Social Handle</button>
                 {handles}
             </div>

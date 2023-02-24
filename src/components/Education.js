@@ -99,7 +99,6 @@ class Education extends Component {
                 subject: "",
                 joined: "",
                 passed: "",
-                editingMode : false,
             },
         },
         this.componentDidMount// sends data to main state
