@@ -92,13 +92,18 @@ class Form extends Component {
     }
 
     handleFormSubmit(){// checking data transfer
-        console.log(this.state)
+        const submitForm = document.querySelector(".preview-btn");
+        const previewDiv = document.querySelector(".preview");
+        submitForm.addEventListener("click", ()=>{
+            previewDiv.classList.remove("hide")
+            previewDiv.classList.add("show")
+        })
+
     }
 
     render() {
         return (
-            <React.Fragment>
-                
+            <React.Fragment> 
                 <div id='container'>
                     <form className='my-form' onSubmit={(e)=>{
                         e.preventDefault()
@@ -111,7 +116,7 @@ class Form extends Component {
                         <Education handleEducation = {this.handleEducation}/>
                         <Skills handleSkills={this.handleSkills}/>
                         <Work handleWork={this.handleWork}/>
-                    <button >Submit</button>
+                    <button className="preview-btn">Preview</button>
                     </form>
                 </div>
                 <MainPreview state={this.state}/>

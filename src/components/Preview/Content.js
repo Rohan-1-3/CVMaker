@@ -6,7 +6,7 @@ class Content extends Component {
         const educationList = props.educationsArr.map(x =>{
             return(
                 <React.Fragment>
-                    <h2>{x.name}</h2>
+                    <h3>{x.name}</h3>
                     {x.level}, {x.subject}, {x.joined} - {x.passed}
                 </React.Fragment>
             )
@@ -14,7 +14,7 @@ class Content extends Component {
 
         const handles = props.handles.map(x => {
             return (// displaying all the handles added
-                <div key={x.handle} className='handle-display'>
+                <div key={x.handle} className='handle'>
                     <img src={x.imgSrc} alt={x.handle}/>
                     {x.name}
                 </div>
