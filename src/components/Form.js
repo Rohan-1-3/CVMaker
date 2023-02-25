@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Education from './Education';
 import Details from './PersonalDetails/Details';
+import MainPreview from './Preview/MainPreview';
 import Skills from './Skills';
 import Work from './Work';
 class Form extends Component {
@@ -96,19 +97,26 @@ class Form extends Component {
 
     render() {
         return (
-            <form className='my-form' onSubmit={(e)=>{
-                e.preventDefault()
-                this.handleFormSubmit()}}>
-               <Details handleName = {this.handleName}
-                        handlePDetails = {this.handlePDetails}
-                        handleContacts = {this.handleContacts}
-                        handleInterests = {this.handleInterests}
-                        handleHandles = {this.handleHandles}/>
-                <Education handleEducation = {this.handleEducation}/>
-                <Skills handleSkills={this.handleSkills}/>
-                <Work handleWork={this.handleWork}/>
-               <button >Submit</button>
-            </form>
+            <React.Fragment>
+                
+                <div id='container'>
+                    <form className='my-form' onSubmit={(e)=>{
+                        e.preventDefault()
+                        this.handleFormSubmit()}}>
+                    <Details handleName = {this.handleName}
+                                handlePDetails = {this.handlePDetails}
+                                handleContacts = {this.handleContacts}
+                                handleInterests = {this.handleInterests}
+                                handleHandles = {this.handleHandles}/>
+                        <Education handleEducation = {this.handleEducation}/>
+                        <Skills handleSkills={this.handleSkills}/>
+                        <Work handleWork={this.handleWork}/>
+                    <button >Submit</button>
+                    </form>
+                </div>
+                <MainPreview state={this.state}/>
+            </React.Fragment>
+            
         );
     }
 }

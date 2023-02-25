@@ -131,12 +131,12 @@ class Education extends Component {
         const schoolDisplay = this.state.educationArr.map(x=>{
             return(
                 <div className='education-list'>
-                <img src='https://cdn-icons-png.flaticon.com/512/32/32213.png' alt='arrow'/>
-                <label>{x.name}</label>
-                <br/>
-                {x.level}, {x.subject}, {x.joined} - {x.passed}
-                <img src='https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/cross-icon.png'
-                     alt='cross' onClick={()=>this.deleteEducation(x.level)}/>
+                    <img src='https://cdn-icons-png.flaticon.com/512/32/32213.png' alt='arrow'/>
+                    <label>{x.name}</label>
+                    <br/>
+                    {x.level}, {x.subject}, {x.joined} - {x.passed}
+                    <img src='https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/cross-icon.png'
+                        alt='cross' onClick={()=>this.deleteEducation(x.level)}/>
                 </div>
             )
         })
