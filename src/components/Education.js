@@ -103,7 +103,6 @@ class Education extends Component {
         },
         this.componentDidMount// sends data to main state
         )
-        console.log(this.state)
     }
 
     formSubmitHanlde = ()=>{

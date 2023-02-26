@@ -48,11 +48,11 @@ class PDetails extends Component {
 
                 <label htmlFor='profile'>Personal Profile</label>
                 <textarea value={this.state.description} onChange={this.handleDescription} 
-                minLength="50" maxLength="100" required/>
+                minLength="50" required/>
 
                 <label htmlFor='occupation'>Profession:</label>
                 <input value={this.state.profession} onChange={this.handleProfession} 
-                minLength="3" maxLength="15" type="text" required/>
+                minLength="3" type="text" required/>
             </div>
         );
     }

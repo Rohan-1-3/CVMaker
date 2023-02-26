@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class Header extends Component {
     render() {
         const props= this.props.state
-        console.log(this.props)
         return (
             <React.Fragment>
                 <div className='display-picture'>

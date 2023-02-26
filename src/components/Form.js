@@ -91,14 +91,13 @@ class Form extends Component {
         })
     }
 
-    handleFormSubmit(){// checking data transfer
+    componentDidMount(){
         const submitForm = document.querySelector(".preview-btn");
         const previewDiv = document.querySelector(".preview");
         submitForm.addEventListener("click", ()=>{
             previewDiv.classList.remove("hide")
             previewDiv.classList.add("show")
         })
-
     }
 
     render() {
@@ -106,8 +105,7 @@ class Form extends Component {
             <React.Fragment> 
                 <div id='container'>
                     <form className='my-form' onSubmit={(e)=>{
-                        e.preventDefault()
-                        this.handleFormSubmit()}}>
+                        e.preventDefault()}}>
                     <Details handleName = {this.handleName}
                                 handlePDetails = {this.handlePDetails}
                                 handleContacts = {this.handleContacts}
