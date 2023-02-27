@@ -27,11 +27,8 @@ class Work extends Component {
     formNameUpdate = (e)=>{
         this.setState({
             form : {
-                id: this.state.form.id,
+                ...this.state.form,
                 name : e.target.value,
-                post : this.state.form.post,
-                joined: this.state.form.joined,// current year
-                left: this.state.form.left,
             }
         })
     }
@@ -39,11 +36,8 @@ class Work extends Component {
     formCompanyUpdate = (e)=>{
         this.setState({
             form : {
-                id: this.state.form.id,
-                name : this.state.form.name,
+                ...this.state.form,
                 post : e.target.value,
-                joined: this.state.form.joined,// current year
-                left: this.state.form.left,
             }
         })
     }
@@ -51,11 +45,8 @@ class Work extends Component {
     formJoinedUpdate = (e)=>{
         this.setState({
             form : {
-                id: this.state.form.id,
-                name : this.state.form.name,
-                post : this.state.form.post,
+                ...this.state.form,
                 joined: e.target.value,// current year
-                left: this.state.form.left,
             }
         })
     }
@@ -63,10 +54,7 @@ class Work extends Component {
     formleftUpdate = (e)=>{
         this.setState({
             form : {
-                id: this.state.form.id,
-                name : this.state.form.name,
-                post : this.state.form.post,
-                joined: this.state.form.joined,// current year
+                ...this.state.form,
                 left: e.target.value,
             }
         })

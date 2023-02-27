@@ -28,11 +28,9 @@ class Education extends Component {
     formNameUpdate=(e)=>{
         this.setState({
             form : {
+                ...this.state.form,
                 name : e.target.value,
-                level : this.state.form.level,
-                subject: this.state.form.subject,
-                joined: this.state.form.joined,
-                passed: this.state.form.passed,
+                
             },
         })
     }
@@ -40,11 +38,8 @@ class Education extends Component {
     formSubjectUpdate=(e)=>{
         this.setState({
             form : {
-                name : this.state.form.name,
-                level : this.state.form.level,
+                ...this.state.form,
                 subject: e.target.value,
-                joined: this.state.form.joined,
-                passed: this.state.form.passed
             },
         })
     }
@@ -52,11 +47,8 @@ class Education extends Component {
     formJoinedUpdate=(e)=>{
         this.setState({
             form : {
-                name : this.state.form.name,
-                level : this.state.form.level,
-                subject: this.state.form.subject,
+                ...this.state.form,
                 joined: e.target.value,
-                passed: this.state.form.passed,
             },
         })
     }
@@ -64,10 +56,7 @@ class Education extends Component {
     formPassedUpdate=(e)=>{
         this.setState({
             form : {
-                name : this.state.form.name,
-                level : this.state.form.level,
-                subject: this.state.form.subject,
-                joined: this.state.form.joined,
+                ...this.state.form,
                 passed: e.target.value,
             },
         })
@@ -76,11 +65,8 @@ class Education extends Component {
     optionSelection = (e)=>{
         this.setState({
             form : {
-                name : this.state.form.name,
+                ...this.state.form,
                 level : e.target.value,
-                subject: this.state.form.subject,
-                joined: this.state.form.joined,
-                passed: this.state.form.passed,
             },
             selected : true
         })
