@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import uniqid from "uniqid"
+import DisableButtons, { EnableButtons } from '../DisableButtonsDOM';
 
 function Interest({handleInterests}) {
     const [interests, setInterest] = useState( {// new interest object
@@ -16,6 +17,7 @@ function Interest({handleInterests}) {
     }, [interestsArray, handleInterests])
 
     const addingInterests = ()=>{
+        DisableButtons()
         setAddInterests(true)
     }
 
@@ -24,8 +26,9 @@ function Interest({handleInterests}) {
     }
 
     const editButton = (id, text)=>{// updates the button to form
+        DisableButtons()
         setInterestsArray(interestsArray.map(
-            interest =>( interest.key === id) ? {...interest, isSubmit:false}:interest))
+            interest =>( interest.key === id) ? {...interest, isSubmit: false} : interest))
         setEditInput(text)
     }
 
@@ -34,8 +37,9 @@ function Interest({handleInterests}) {
     }
 
     const editingInterests = (interest)=>{
+        EnableButtons()
         setInterestsArray(interestsArray.map(
-            x =>( x.key === interest.key) ? {...x, isSubmit:true, text: editInput} : interest))
+            x =>( x.key === interest.key) ? {...x, isSubmit:true, text: editInput} : x))
         setEditInput("")
     }
 
@@ -45,6 +49,7 @@ function Interest({handleInterests}) {
 
     const interestFormHandle = (e)=>{// inserts new interest to arr 
         e.preventDefault()
+        EnableButtons()
         setInterestsArray(prevArray => [...prevArray, interests])
         setAddInterests(false)
         setInterest({key: uniqid(), isSubmit : true, text : ""})

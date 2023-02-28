@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import DisableButtons, { EnableButtons } from './DisableButtonsDOM';
 
 function Skills({handleSkills}) {
     const [addingMode, setAddingMode] = useState(false);
@@ -10,6 +11,7 @@ function Skills({handleSkills}) {
     }, [skillsArr, handleSkills])
 
     const addingModeOn =()=>{
+        DisableButtons()
         setAddingMode(true)
     }
     
@@ -18,6 +20,7 @@ function Skills({handleSkills}) {
     }
 
     const onSubmit = ()=>{
+        EnableButtons()
         setSkillsArr(prevArr => [...prevArr, inputDisplay])
         setAddingMode(false)
         setInputDisplay("")
@@ -39,7 +42,7 @@ function Skills({handleSkills}) {
         })
         if(addingMode){
         return (
-            <div>
+            <div className='skills'>
                 <label>Skills</label>
                 <input value={inputDisplay} onChange={inputFunction}/>
                 <button onClick={onSubmit}>Add Skill</button>
@@ -48,7 +51,7 @@ function Skills({handleSkills}) {
         );
     }else{
         return(
-            <div>
+            <div className='skills'>
                 <label>Skills</label>
                 <button onClick={addingModeOn}>Add Skills</button>
                 {skills}

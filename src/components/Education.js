@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import DisableButtons, { EnableButtons } from './DisableButtonsDOM';
 import yearSelect from './Year';
 
 function Education({handleEducation}) {
@@ -20,6 +21,7 @@ function Education({handleEducation}) {
     
 
     const adddingModeOn = ()=>{
+        DisableButtons()
         setAddingMode(true)
     }
 
@@ -48,6 +50,7 @@ function Education({handleEducation}) {
 
 
     const formSubmitHanlde = ()=>{
+        EnableButtons()
        setEducationArr(educationArr.filter(x=>(x.level !== form.level)))
        setEducationArr(prevArr => [...prevArr, form])
         setAddingMode(false)
@@ -121,7 +124,7 @@ function Education({handleEducation}) {
         return (
             <div className='education'>
                 <label>Education</label>        
-                <button onClick={adddingModeOn}>Add Level</button>
+                <button onClick={adddingModeOn}>Add/Edit Level</button>
                 {schoolDisplay}
             </div>
         )

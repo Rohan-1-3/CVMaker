@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import yearSelect from './Year';
 import uniqid from "uniqid"
+import DisableButtons, { EnableButtons } from './DisableButtonsDOM';
 
 function Work({handleWork}) {
     const [addingMode, setAddingMode] = useState(false);
@@ -18,6 +19,7 @@ function Work({handleWork}) {
     }, [workArr, handleWork])
 
     const addingModeOn=()=>{
+        DisableButtons()
         setAddingMode(true)
     }
     // methods for updating state and display..
@@ -39,6 +41,7 @@ function Work({handleWork}) {
     // ...ending of methods
 
     const formSubmitHanlde = ()=>{
+        EnableButtons()
         setWorkArr([...workArr, form])
         setAddingMode(false)
         setForm({
@@ -77,7 +80,7 @@ function Work({handleWork}) {
         );
     }else{
         return(// form for work experience
-            <div className='work-form'>
+            <div className='work-experience'>
                 <label>Work Experience</label>
                 <input value={form.name} onChange={formNameUpdate} placeholder="Company Name"/>
 
