@@ -19,6 +19,7 @@ main{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 4rem;
+    padding-top: 0;
     background-color: grey;
     border-radius: 10px;
 }
@@ -145,7 +146,8 @@ footer img:hover{
 
 .preview{
     border-radius: 1em;
-    min-width: 40em;
+    min-width: 21cm;
+    min-height: 29.7cm;
     margin: 10em;
     background-color: white;
     display: grid;
@@ -163,7 +165,7 @@ footer img:hover{
 
 .preview > :nth-child(odd){
     color: white;
-    background-color: black;
+    background-color: red;
     margin-left: 5em;
     margin-right: 5em;
 }

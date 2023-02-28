@@ -1,55 +1,37 @@
-import React, { Component } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react';
 
-class Contacts extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            number : "",
-            email : "",
-            address: ""
-        }
-    }
-// methods for updating inputs
-    handleNumber = e =>{
-        this.setState({
-            number : e.target.value
-        },
-        this.componentDidMount)
-    }
+function Contacts({handleContacts}) {
+    const [number, setNumber] = useState('');
+    const [email, setEmail] = useState('');
+    const [address, setAddress] = useState('');
+  
+    useEffect(()=>{
+        handleContacts({number, email, address})
+    }, [number, email, address])
+    
+    const handleNumber = (e) => {
+      setNumber(e.target.value);
+    };
+  
+    const handleEmail = (e) => {
+      setEmail(e.target.value);
+    };
+  
+    const handleAddress = (e) => {
+      setAddress(e.target.value);
+    };
+  
+    return (
+        <div className='contacts'>
+            <input value={number} onChange={handleNumber}
+            pattern="[9][7-8][0-9]{8}" type="text" required/>
 
-    handleEmail = e =>{
-        this.setState({
-            email : e.target.value
-        },
-        this.componentDidMount)
-    }
+            <input value={email} onChange={handleEmail} type="email" required/>
 
-    handleAddress = e =>{
-        this.setState({
-            address : e.target.value
-        },
-        this.componentDidMount)
-    }
-
-    componentDidMount(){// sending updated data to main state
-        this.props.handleContacts(this.state)
-    }
-
-    render() {
-        return (
-            <div className='contacts'>
-                <label htmlFor='phone'>Phone:</label>
-                <input value={this.state.number} onChange={this.handleNumber}
-                pattern="[9][7-8][0-9]{8}" type="text" required/>
-
-                <label htmlFor='email'>E-mail:</label>
-                <input value={this.state.email} onChange={this.handleEmail} type="email" required/>
-
-                <label htmlFor='address'>Address:</label>
-                <input value={this.state.address} onChange={this.handleAddress}  title='Suggested Format=>Balaju-15' required/>
-            </div>
-        );
-    }
+            <input value={address} onChange={handleAddress}  title='Suggested Format=>Balaju-15' required/>
+        </div>
+    );
 }
 
 export default Contacts;

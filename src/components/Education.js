@@ -1,132 +1,82 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import yearSelect from './Year';
 
-class Education extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            addingMode : false,// for button to level select
-            selected: false,// for select to form
-            form : {
-                name : "",
-                level : "",
-                subject: "",
-                joined: `${new Date().getFullYear()}`,// current year
-                passed: "",
-            },
-            educationArr : []// all the levels education to be added in this array
-        }
-    }
+function Education({handleEducation}) {
+    const [addingMode, setAddingMode] = useState(false);
+    const [selected, setSelected] = useState(false);
+    const [form, setForm] = useState({
+        name : "",
+        level : "",
+        subject: "",
+        joined: `${new Date().getFullYear()}`,// current year
+        passed: "",
+    });
+    const [educationArr,  setEducationArr] = useState([]);
+
+    useEffect(()=>{
+        handleEducation(educationArr)
+    }, [educationArr, handleEducation])
+
     
-    adddingModeOn = ()=>{
-        this.setState({// button pressed
-            addingMode : true
-        })
+
+    const adddingModeOn = ()=>{
+        setAddingMode(true)
     }
 
     // methods for updating the form details
-    formNameUpdate=(e)=>{
-        this.setState({
-            form : {
-                ...this.state.form,
-                name : e.target.value,
-                
-            },
-        })
+    const formNameUpdate=(e)=>{
+        setForm({...form, name: e.target.value})
     }
     
-    formSubjectUpdate=(e)=>{
-        this.setState({
-            form : {
-                ...this.state.form,
-                subject: e.target.value,
-            },
-        })
+    const formSubjectUpdate=(e)=>{
+        setForm({...form, subject : e.target.value})
     }
 
-    formJoinedUpdate=(e)=>{
-        this.setState({
-            form : {
-                ...this.state.form,
-                joined: e.target.value,
-            },
-        })
+    const formJoinedUpdate=(e)=>{
+        setForm({...form, joined : e.target.value})
     }
 
-    formPassedUpdate=(e)=>{
-        this.setState({
-            form : {
-                ...this.state.form,
-                passed: e.target.value,
-            },
-        })
+    const formPassedUpdate=(e)=>{
+        setForm({...form, passed : e.target.value})
     }
 
-    optionSelection = (e)=>{
-        this.setState({
-            form : {
-                ...this.state.form,
-                level : e.target.value,
-            },
-            selected : true
-        })
+    const optionSelection = (e)=>{
+        setForm({...form, level : e.target.value})
+        setSelected(true)
     }
     // form details handling ends here
 
-    // adding and editing the education details happen here
-    editHandle= ()=>{
-        this.state.educationArr.push(this.state.form)
-        this.setState({// resets form
-            addingMode : false,
-            selected: false,
-            form : {
-                name : `${new Date().getFullYear()}`,
-                level : "",
-                subject: "",
-                joined: "",
-                passed: "",
-            },
-        },
-        this.componentDidMount// sends data to main state
-        )
+
+    const formSubmitHanlde = ()=>{
+       setEducationArr(educationArr.filter(x=>(x.level !== form.level)))
+       setEducationArr(prevArr => [...prevArr, form])
+        setAddingMode(false)
+        setSelected(false)
+        setForm({
+            name : "",
+            level : "",
+            subject: "",
+            joined: `${new Date().getFullYear()}`,
+            passed: "",
+        })
     }
 
-    formSubmitHanlde = ()=>{
-       this.setState({// for editing removes prev and lauches function for the edited one
-        educationArr : this.state.educationArr.filter(x=>(x.level !== this.state.form.level))
-       },
-       this.editHandle
-       ) 
-       
+    const deleteEducation = (level)=>{
+        setEducationArr(educationArr.filter(x => (x.level !== level)))
     }
-
-    deleteEducation = (level)=>{
-        this.setState({// filters in all except deleted one
-            educationArr : this.state.educationArr.filter(x => (x.level !== level))
-        },
-        this.componentDidMount
-        )
-    }
-
-    componentDidMount(){
-        this.props.handleEducation(this.state.educationArr)
-    }
-
-    render() {
-        const schoolDisplay = this.state.educationArr.map(x=>{
+    const schoolDisplay = educationArr.map(x=>{
             return(
-                <div className='education-list'>
+                <div className='education-list' key={x.level}>
                     <img src='https://cdn-icons-png.flaticon.com/512/32/32213.png' alt='arrow'/>
                     <label>{x.name}</label>
                     <br/>
                     {x.level}, {x.subject}, {x.joined} - {x.passed}
                     <img src='https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/cross-icon.png'
-                        alt='cross' onClick={()=>this.deleteEducation(x.level)}/>
+                        alt='cross' onClick={()=>deleteEducation(x.level)}/>
                 </div>
             )
         })
-        const form = this.state.form;
-        const levelsList = (<select onChange={this.optionSelection}>
+        const levelsList = (<select onChange={optionSelection}>
             <option>Select </option>
             <option value="DLE & SLC">DLE & SLC</option>
             <option value="DLE & SEE">DLE & SEE</option>
@@ -135,8 +85,8 @@ class Education extends Component {
             <option value="Masters">Masters</option>
             <option value="PhD">PhD</option>
         </select>)
-        if(this.state.addingMode){
-            if(!this.state.selected){
+        if(addingMode){
+            if(!selected){
                 return(
                     <div>
                         {levelsList}
@@ -148,22 +98,22 @@ class Education extends Component {
                     <div className='education'>
                         <label>Education</label>
                         <label htmlFor='school-name'>Institute Name:</label>
-                        <input value={form.name} onChange={this.formNameUpdate}/>
+                        <input value={form.name} onChange={formNameUpdate}/>
         
                         <label htmlFor='subject'>Subject/Course:</label>
-                        <input value={form.subject} onChange={this.formSubjectUpdate}/>
+                        <input value={form.subject} onChange={formSubjectUpdate}/>
         
                         <label htmlFor='joined'>Joined Year:</label>
-                        <select onChange={this.formJoinedUpdate}>
+                        <select onChange={formJoinedUpdate}>
                             {yearSelect}
                         </select>
         
                         <label htmlFor='passed'>Passed Year:</label>
-                        <select onChange={this.formPassedUpdate}>
+                        <select onChange={formPassedUpdate}>
                             {yearSelect}
                         </select>
         
-                        <button onClick={this.formSubmitHanlde}>Submit Information</button>
+                        <button onClick={formSubmitHanlde}>Submit Information</button>
                         {schoolDisplay}
                     </div>
                 );
@@ -173,12 +123,12 @@ class Education extends Component {
         return (
             <div className='education'>
                 <label>Education</label>        
-                <button onClick={this.adddingModeOn}>Add Level</button>
+                <button onClick={adddingModeOn}>Add Level</button>
                 {schoolDisplay}
             </div>
         )
     }
-}
+
 }
 
 export default Education;

@@ -1,61 +1,38 @@
-import React, { Component } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect, useState} from 'react';
 
-class Name extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            firstname : "",
-            middlename: "",
-            lastname: ""
-        }
+function Name({handleName}) {
+    const [firstname, setFirstName] = useState("");
+    const [middlename, setMiddleName] = useState("");
+    const [lastname, setLastName] = useState("");
+
+    useEffect(()=>{
+        handleName({firstname, middlename, lastname})
+    }, [firstname, middlename, lastname])  
+
+    const firstNameRender = (e)=>{
+        setFirstName(e.target.value)
     }
 
-    // methods for updating inputs 
-    firstNameRender = (e)=>{
-        this.setState({
-            firstname : e.target.value 
-        },
-        this.componentDidMount// gets called only after the Name.js state is updated
-        )
+    const middleNameRender =(e)=>{
+        setMiddleName(e.target.value)        
     }
 
-    middleNameRender =(e)=>{
-        this.setState({
-            middlename : e.target.value 
-        },
-        this.componentDidMount
-        )
-        
+    const lastNameRender = (e)=>{
+        setLastName(e.target.value)
     }
 
-    lastNameRender = (e)=>{
-        this.setState({
-            lastname : e.target.value 
-        },
-        this.componentDidMount
-        )
-    }
+    return (
+        <div className='name'>
+            <input value={firstname} onChange={firstNameRender} 
+            minLength="3" maxLength="15" type="text" required/>
 
-    componentDidMount(){// updates the parent state
-        this.props.handleName(this.state)
-    }
+            <input value={middlename} onChange={middleNameRender} type="text"/>
 
-    render() {
-        return (
-            <div className='name'>
-                <label htmlFor='firstname'>First Name:</label>
-                <input value={this.state.firstname} onChange={this.firstNameRender} 
-                minLength="3" maxLength="15" type="text" required/>
-
-                <label htmlFor='middlename'>Middle Name:</label>
-                <input value={this.state.middlename} onChange={this.middleNameRender} type="text"/>
-
-                <label htmlFor='lastname'>Last Name:</label>
-                <input value={this.state.lastname} onChange={this.lastNameRender} type="text" 
-                minLength="3" maxLength="15" required/>
-            </div>
-        );
-    }
+            <input value={lastname} onChange={lastNameRender} type="text" 
+            minLength="3" maxLength="15" required/>
+        </div>
+    );
 }
 
 export default Name;

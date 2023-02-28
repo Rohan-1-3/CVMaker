@@ -1,61 +1,39 @@
-import React, { Component } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react';
 
-class PDetails extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            imageSrc : "",
-            description : "",
-            profession : "" 
-        }
-    }
-    
-    // methods for updating inputs
-    handleImage = (e)=>{
-        this.setState({
-            imageSrc : URL.createObjectURL(e.target.files[0])// creating a local url of image added by user
-        },
-        this.componentDidMount
-        )
+function PDetails({handlePDetails}) {
+    const [imageSrc, setImageSrc] = useState("");
+    const [description, setDescription] = useState("");
+    const [profession, setProfession] = useState("");
+
+    useEffect(()=>{
+        handlePDetails({imageSrc, description, profession})
+    },[imageSrc, description, profession])
+
+    const handleImage = (e)=>{
+        setImageSrc(URL.createObjectURL(e.target.files[0]))
     }
 
-    handleDescription=(e)=>{
-        this.setState({
-            description : e.target.value
-        },
-        this.componentDidMount
-        )
+    const handleDescription=(e)=>{
+        setDescription(e.target.value)
     }
 
-    handleProfession=(e)=>{
-        this.setState({
-            profession : e.target.value
-        },
-        this.componentDidMount
-        )
+    const handleProfession=(e)=>{
+        setProfession(e.target.value)
     }
 
-    componentDidMount(){// sending updated data to main state
-        this.props.handlePDetails(this.state)
-    }
+    return (
+        <div className='details'>
+            <input type="file" accept="image/png, image/jpeg" 
+            title='Choose Your Display Picture' onChange={handleImage} required/>
 
-    render() {
-        return (
-            <div className='details'>
-                <label htmlFor='display-picture'>Display Picture</label>
-                <input type="file" accept="image/png, image/jpeg" 
-                title='Choose Your Display Picture' onChange={this.handleImage} required/>
+            <textarea value={description} onChange={handleDescription} 
+            minLength="50" required/>
 
-                <label htmlFor='profile'>Personal Profile</label>
-                <textarea value={this.state.description} onChange={this.handleDescription} 
-                minLength="50" required/>
-
-                <label htmlFor='occupation'>Profession:</label>
-                <input value={this.state.profession} onChange={this.handleProfession} 
-                minLength="3" type="text" required/>
-            </div>
-        );
-    }
+            <input value={profession} onChange={handleProfession} 
+            minLength="3" type="text" required/>
+        </div>
+    );
 }
 
 export default PDetails;

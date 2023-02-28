@@ -1,142 +1,106 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import yearSelect from './Year';
 import uniqid from "uniqid"
 
-class Work extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            addingMode : false,// button to form when true
-            form : {
-                id: uniqid(),
-                name : "",
-                post : "",
-                joined: `${new Date().getFullYear()}`,// current year
-                left: "",
-            },
-            workArr : []// stores all the work experience
-        }
-    }
+function Work({handleWork}) {
+    const [addingMode, setAddingMode] = useState(false);
+    const [form, setForm] = useState({
+        id: uniqid(),
+        name : "",
+        post : "",
+        joined: `${new Date().getFullYear()}`,// current year
+        left: "",
+    })
+    const [workArr, setWorkArr] = useState([]);
 
-    addingModeOn=()=>{
-        this.setState({
-            addingMode : true
-        })
+    useEffect(()=>{
+        handleWork(workArr)
+    }, [workArr, handleWork])
+
+    const addingModeOn=()=>{
+        setAddingMode(true)
     }
     // methods for updating state and display..
-    formNameUpdate = (e)=>{
-        this.setState({
-            form : {
-                ...this.state.form,
-                name : e.target.value,
-            }
-        })
+    const formNameUpdate = (e)=>{
+        setForm({...form, name : e.target.value})
     }
 
-    formCompanyUpdate = (e)=>{
-        this.setState({
-            form : {
-                ...this.state.form,
-                post : e.target.value,
-            }
-        })
+    const formCompanyUpdate = (e)=>{
+        setForm({...form, post : e.target.value})
     }
 
-    formJoinedUpdate = (e)=>{
-        this.setState({
-            form : {
-                ...this.state.form,
-                joined: e.target.value,// current year
-            }
-        })
+    const formJoinedUpdate = (e)=>{
+        setForm({...form, joined : e.target.value})
     }
 
-    formleftUpdate = (e)=>{
-        this.setState({
-            form : {
-                ...this.state.form,
-                left: e.target.value,
-            }
-        })
+    const formleftUpdate = (e)=>{
+        setForm({...form, left : e.target.value})
     }
     // ...ending of methods
 
-    formSubmitHanlde = ()=>{
-        this.state.workArr.push(this.state.form);// direct changing the array
-        this.setState({// resets the form
-            addingMode : false,
-            form : {
-                id: uniqid(),
-                name : "",
-                post : "",
-                joined: `${new Date().getFullYear()}`,// current year
-                left: "",
-            },
-        },
-        this.componentDidMount)// sending data to main state
-    }
-
-    deleteWork = (id)=>{
-        this.setState({// filters in all except the one deleted
-            workArr : this.state.workArr.filter(x => x.id !== id)
-        },
-        this.componentDidMount)// send data to main state
-    }
-
-    componentDidMount(){
-        this.props.handleWork(this.state.workArr)
-    }
-    
-    render() {
-        const workDisplay = this.state.workArr.map(x=>{// has display for all the experience 
-            return(
-                <div className='work-list'>
-                    <img src='https://cdn-icons-png.flaticon.com/512/32/32213.png' alt='arrow'/>
-                    <label>{x.name}</label>
-                    <br/>
-                    {x.post}, {x.joined} - {x.left}
-                    <img src='https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/cross-icon.png'
-                        alt='cross' onClick={()=>this.deleteWork(x.id)}/>
-                </div>
-            )
+    const formSubmitHanlde = ()=>{
+        setWorkArr([...workArr, form])
+        setAddingMode(false)
+        setForm({
+            id: uniqid(),
+            name : "",
+            post : "",
+            joined: `${new Date().getFullYear()}`,// current year
+            left: "",
         })
-
-        const form = this.state.form
-        if(!this.state.addingMode){// adding button
-            return (
-                <div className='work-experience'>
-                    <label>Work Experience</label>
-                    <button onClick={this.addingModeOn}>Add New Work Experience</button>
-                    {workDisplay}
-                </div>
-            );
-        }else{
-            
-            return(// form for work experience
-                <div className='work-form'>
-                    <label>Work Experience</label>
-                    <label htmlFor='company-name'>Company Name:</label>
-                    <input value={form.name} onChange={this.formNameUpdate}/>
-
-                    <label htmlFor='subject'>Post/ Position:</label>
-                    <input value={form.post} onChange={this.formCompanyUpdate}/>
-
-                    <label htmlFor='joined'>Joined Year:</label>
-                    <select onChange={this.formJoinedUpdate}>
-                        {yearSelect}
-                    </select>
-
-                    <label htmlFor='left'>left Year:</label>
-                    <select onChange={this.formleftUpdate}>
-                        {yearSelect}
-                    </select>
-
-                    <button onClick={this.formSubmitHanlde}>Submit Information</button>
-                    {workDisplay}
-                </div>
-            )
-        }
     }
+
+    const deleteWork = (id)=>{
+        setWorkArr(workArr.filter(x => x.id !== id))
+    }
+
+    const workDisplay = workArr.map(x=>{// has display for all the experience 
+        return(
+            <div className='work-list'>
+                <img src='https://cdn-icons-png.flaticon.com/512/32/32213.png' alt='arrow'/>
+                <label>{x.name}</label>
+                <br/>
+                {x.post}, {x.joined} - {x.left}
+                <img src='https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/cross-icon.png'
+                    alt='cross' onClick={()=>deleteWork(x.id)}/>
+            </div>
+        )
+    })
+
+    if(!addingMode){// adding button
+        return (
+            <div className='work-experience'>
+                <label>Work Experience</label>
+                <button onClick={addingModeOn}>Add New Work Experience</button>
+                {workDisplay}
+            </div>
+        );
+    }else{
+        return(// form for work experience
+            <div className='work-form'>
+                <label>Work Experience</label>
+                <label htmlFor='company-name'>Company Name:</label>
+                <input value={form.name} onChange={formNameUpdate}/>
+
+                <label htmlFor='subject'>Post/ Position:</label>
+                <input value={form.post} onChange={formCompanyUpdate}/>
+
+                <label htmlFor='joined'>Joined Year:</label>
+                <select onChange={formJoinedUpdate}>
+                    {yearSelect}
+                </select>
+
+                <label htmlFor='left'>left Year:</label>
+                <select onChange={formleftUpdate}>
+                    {yearSelect}
+                </select>
+
+                <button onClick={formSubmitHanlde}>Submit Information</button>
+                {workDisplay}
+            </div>
+        )
+    }
+
 }
 
 export default Work;

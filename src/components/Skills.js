@@ -1,66 +1,48 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 
-class Skills extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            addingMode : false,
-            inputDisplay : "",
-            skillsArr : [],
-        }
+function Skills({handleSkills}) {
+    const [addingMode, setAddingMode] = useState(false);
+    const [inputDisplay, setInputDisplay] = useState("");
+    const [skillsArr, setSkillsArr] = useState([]);
+
+    useEffect(()=>{
+        handleSkills(skillsArr)
+    }, [skillsArr, handleSkills])
+
+    const addingModeOn =()=>{
+        setAddingMode(true)
     }
     
-    addingModeOn =()=>{
-        this.setState({
-            addingMode : true
-        })
-    }
-    
-    inputDisplay = (e)=>{
-        this.setState({
-            inputDisplay : e.target.value
-        })
+    const inputFunction = (e)=>{
+       setInputDisplay(e.target.value)
     }
 
-    onSubmit = ()=>{
-        this.state.skillsArr.push(this.state.inputDisplay)
-        this.setState({
-            addingMode : false,
-            inputDisplay : "",
-        },
-        this.componentDidMount
-        )
+    const onSubmit = ()=>{
+        setSkillsArr(prevArr => [...prevArr, inputDisplay])
+        setAddingMode(false)
+        setInputDisplay("")
     }
 
-    deleteSkills = (skill)=>{
-        this.setState({// filters in all except deleted one
-            skillsArr : this.state.skillsArr.filter(x => (x !== skill))
-        },
-        this.componentDidMount
-        )
-    }    
+    const deleteSkills = (skill)=>{
+        setSkillsArr(skillsArr.filter(x => (x !== skill)))
+    }  
 
-    componentDidMount(){
-        this.props.handleSkills(this.state.skillsArr)
-    }
-
-    render() {
-        const skills = this.state.skillsArr.map(x=>{
+    const skills = skillsArr.map(x=>{
             return(
                 <div key={x} className="skills-list">
                     <img src='https://cdn-icons-png.flaticon.com/512/32/32213.png' alt='arrow'/>
                     {x}
                     <img src='https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/cross-icon.png'
-                     alt='cross' onClick={()=>this.deleteSkills(x)}/>
+                     alt='cross' onClick={()=>deleteSkills(x)}/>
                 </div>
             )
         })
-        if(this.state.addingMode){
+        if(addingMode){
         return (
             <div>
                 <label>Skills</label>
-                <input value={this.state.inputDisplay} onChange={this.inputDisplay}/>
-                <button onClick={this.onSubmit}>Add Skill</button>
+                <input value={inputDisplay} onChange={inputFunction}/>
+                <button onClick={onSubmit}>Add Skill</button>
                 {skills}
             </div>
         );
@@ -68,11 +50,10 @@ class Skills extends Component {
         return(
             <div>
                 <label>Skills</label>
-                <button onClick={this.addingModeOn}>Add Skills</button>
+                <button onClick={addingModeOn}>Add Skills</button>
                 {skills}
             </div>
         )
-    }
     }
 }
 

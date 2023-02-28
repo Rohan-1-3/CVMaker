@@ -1,22 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Name from './Name';
 import PDetails from './PDetails';
 import Contacts from './Contacts';
 import Interest from "./Interest";
 import Handles from './Handles';
 
-class Details extends Component {
-    render() {
-        return (
-            <React.Fragment>
-                <Name handleName = {this.props.handleName}/>
-                <PDetails handlePDetails = {this.props.handlePDetails}/>
-                <Contacts handleContacts = {this.props.handleContacts}/>
-                <Handles handleHandles = {this.props.handleHandles}/>
-                <Interest handleInterests = {this.props.handleInterests}/>
-            </React.Fragment>
-        );
-    }
+function Details({handleName, handlePDetails, handleContacts,handleInterests, handleHandles}) {
+    return (
+        <React.Fragment>
+            <Name handleName = {handleName}/>
+            <PDetails handlePDetails = {handlePDetails}/>
+            <Contacts handleContacts = {handleContacts}/>
+            <Handles handleHandles = {handleHandles}/>
+            <Interest handleInterests = {handleInterests}/>
+        </React.Fragment>
+    );
 }
 
 export default Details;
