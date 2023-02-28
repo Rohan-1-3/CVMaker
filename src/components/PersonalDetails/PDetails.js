@@ -27,10 +27,10 @@ function PDetails({handlePDetails}) {
             <input type="file" accept="image/png, image/jpeg" 
             title='Choose Your Display Picture' onChange={handleImage} required/>
 
-            <textarea value={description} onChange={handleDescription} 
+            <textarea value={description}  placeholder='Profile Descrition...' onChange={handleDescription} 
             minLength="50" required/>
 
-            <input value={profession} onChange={handleProfession} 
+            <input value={profession}  placeholder='Profession' onChange={handleProfession} 
             minLength="3" type="text" required/>
         </div>
     );

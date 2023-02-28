@@ -97,19 +97,17 @@ function Education({handleEducation}) {
                 return (
                     <div className='education'>
                         <label>Education</label>
-                        <label htmlFor='school-name'>Institute Name:</label>
-                        <input value={form.name} onChange={formNameUpdate}/>
+                        <input value={form.name} onChange={formNameUpdate}  placeholder='Institute Name'/>
+
+                        <input value={form.subject} onChange={formSubjectUpdate}  placeholder='Subject'/>
         
-                        <label htmlFor='subject'>Subject/Course:</label>
-                        <input value={form.subject} onChange={formSubjectUpdate}/>
-        
-                        <label htmlFor='joined'>Joined Year:</label>
                         <select onChange={formJoinedUpdate}>
+                            <option>Select Joined Year</option>
                             {yearSelect}
                         </select>
-        
-                        <label htmlFor='passed'>Passed Year:</label>
+
                         <select onChange={formPassedUpdate}>
+                            <option>Select Passed Year</option>
                             {yearSelect}
                         </select>
         

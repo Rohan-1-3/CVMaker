@@ -25,11 +25,11 @@ function Name({handleName}) {
     return (
         <div className='name'>
             <input value={firstname} onChange={firstNameRender} 
-            minLength="3" maxLength="15" type="text" required/>
+            minLength="3" maxLength="15" type="text" placeholder='First Name' required/>
 
-            <input value={middlename} onChange={middleNameRender} type="text"/>
+            <input value={middlename} onChange={middleNameRender}  placeholder='Middle Name' type="text"/>
 
-            <input value={lastname} onChange={lastNameRender} type="text" 
+            <input value={lastname} onChange={lastNameRender} placeholder='Last Name' type="text" 
             minLength="3" maxLength="15" required/>
         </div>
     );

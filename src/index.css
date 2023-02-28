@@ -165,7 +165,7 @@ footer img:hover{
 
 .preview > :nth-child(odd){
     color: white;
-    background-color: red;
+    background-color: black;
     margin-left: 5em;
     margin-right: 5em;
 }

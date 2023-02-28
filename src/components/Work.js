@@ -79,19 +79,17 @@ function Work({handleWork}) {
         return(// form for work experience
             <div className='work-form'>
                 <label>Work Experience</label>
-                <label htmlFor='company-name'>Company Name:</label>
-                <input value={form.name} onChange={formNameUpdate}/>
+                <input value={form.name} onChange={formNameUpdate} placeholder="Company Name"/>
 
-                <label htmlFor='subject'>Post/ Position:</label>
-                <input value={form.post} onChange={formCompanyUpdate}/>
+                <input value={form.post} onChange={formCompanyUpdate} placeholder="Post/ Position" />
 
-                <label htmlFor='joined'>Joined Year:</label>
                 <select onChange={formJoinedUpdate}>
+                    <option>Select Joined Year</option>
                     {yearSelect}
                 </select>
 
-                <label htmlFor='left'>left Year:</label>
                 <select onChange={formleftUpdate}>
+                    <option>Select Left Year</option>
                     {yearSelect}
                 </select>
 

@@ -24,12 +24,14 @@ function Contacts({handleContacts}) {
   
     return (
         <div className='contacts'>
-            <input value={number} onChange={handleNumber}
+            <input value={number} onChange={handleNumber}  placeholder='Phone Number'
             pattern="[9][7-8][0-9]{8}" type="text" required/>
 
-            <input value={email} onChange={handleEmail} type="email" required/>
+            <input value={email} onChange={handleEmail} 
+            placeholder='E-mail' type="email" required/>
 
-            <input value={address} onChange={handleAddress}  title='Suggested Format=>Balaju-15' required/>
+            <input value={address} onChange={handleAddress}   placeholder='Address'
+            title='Suggested Format=>Balaju-15' required/>
         </div>
     );
 }
