@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DisableButtons, { EnableButtons } from '../DisableButtonsDOM';
+import Github from "../../images/github.png";
+import Twitter from "../../images/twitter.png";
 
 function Handles({handleHandles}) {
     const [inserting, setInserting] = useState(false);
@@ -10,7 +12,7 @@ function Handles({handleHandles}) {
     const [initialSocials, setInitialSocials] = useState([
         {// helps to edit and for image
         handle : "Github",
-        imgSrc : "https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png",
+        imgSrc : Github,
         name : ""
     }, {
         handle : "Instagram",
@@ -18,7 +20,7 @@ function Handles({handleHandles}) {
         name : ""
     },{
         handle : "Twitter",
-        imgSrc : "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Twitter-logo.svg/2491px-Twitter-logo.svg.png",
+        imgSrc : Twitter,
         name : ""
     }
 ])

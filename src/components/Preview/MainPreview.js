@@ -1,4 +1,5 @@
 import React from 'react';
+import arrow from "../../images/arrow.png"
 import Content from './Content';
 import Header from './Header';
 import Lists from './Lists';
@@ -10,39 +11,13 @@ function MainPreview({state}) {
         <div>
             <div className='preview hide'>
                 <Header state = {state}/>
-                <Content state = {state}/>
-                <Lists name = "Skills" list = {state.skills}/>
-                <Lists name = "Interests" list = {interest}/>
-                <Work state = {state}/>
+                <Content state = {state} arrow = {arrow}/>
+                <Lists name = "Skills" list = {state.skills} arrow = {arrow}/>
+                <Lists name = "Interests" list = {interest} arrow = {arrow}/>
+                <Work state = {state} arrow = {arrow}/>
             </div>
         </div>
     );
 }
 
 export default MainPreview;
-
-// import React, { Component } from 'react';
-// import Content from './Content';
-// import Header from './Header';
-// import Lists from './Lists';
-// import Work from './Work';
-
-// class MainPreview extends Component {
-//     render() {
-        // const interest = this.props.state.interest.map(x => x.text)
-        // const props = this.props.state
-        // return (
-        //     <div>
-        //         <div className='preview hide'>
-        //             <Header state = {props}/>
-        //             <Content state = {props}/>
-        //             <Lists name = "Skills" list = {props.skills}/>
-        //             <Lists name = "Interests" list = {interest}/>
-        //             <Work state = {props}/>
-        //         </div>
-        //     </div>
-        // );
-//     }
-// }
-
-// export default MainPreview;

@@ -1,18 +1,18 @@
 import React from 'react';
 
-function Work({state}) {
+function Work({state,  arrow}) {
     const workList = state.works.map(x =>{
         return(
-            <React.Fragment>
+            <div className='work-display'>
                 <h3>{x.name}</h3>
                 {x.post}, {x.joined} - {x.passed}
-            </React.Fragment>
+            </div>
         )
     })
     if(state.works.length > 0){
         return (
             <div className='work'>
-                <h2>Work Experience</h2>
+                <h1><img src={arrow} alt=""/>Work Experience</h1>
                 {workList}
             </div>
         );

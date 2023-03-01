@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Lists({name, list}) {
+function Lists({name, list, arrow}) {
     const lists = list.map(x => <li key={x}>{x}</li>)
     return (
         <div className={name}>
-            <h2>{name}</h2>
+            <h1><img src={arrow} alt=""/>{name}</h1>
             <ul>{lists}</ul>
         </div>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import Github from "../images/2c3ed42168e196f2bde5.png"
+import Github from "../images/github.png"
 import Form from './Form';
 
 function InitialDesign({title, href}) {
